@@ -27,7 +27,7 @@ interface axi4_lite_slave_if(input bit ACLK, input bit ARESETn);
 
     // Read data channel ports
     logic [DATA_WIDTH-1:0] RDATA;
-    logic [RSP_WIDTH-1:0] RRSEP;
+    logic [RSP_WIDTH-1:0] RRESP;
     logic RVALID;
     logic RREADY;
 
@@ -76,7 +76,7 @@ interface axi4_lite_slave_if(input bit ACLK, input bit ARESETn);
 
         // Read data channel
         input RDATA;
-        input RRSEP;
+        input RRESP;
         input RVALID;
     endclocking
 
@@ -109,7 +109,7 @@ interface axi4_lite_slave_if(input bit ACLK, input bit ARESETn);
 
         // Read data channel signals
         input RDATA;
-        input RRSEP;
+        input RRESP;
         input RVALID;
         input RREADY;
     endclocking
