@@ -11,7 +11,7 @@ TOP_SV          := testbench/axi4_lite_slave_top.sv
 INCDIR          := +incdir+./testbench
 
 # Simulation Settings
-TESTNAME        := base_test
+TESTNAME        := axi4_lite_slave_base_test
 VERBOSITY       := UVM_MEDIUM
 SEED            := 1
 

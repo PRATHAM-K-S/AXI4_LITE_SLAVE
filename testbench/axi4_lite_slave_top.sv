@@ -49,7 +49,7 @@ module axi4_lite_slave_top;
 
     initial begin
         uvm_config_db #(virtual axi4_lite_slave_if)::set(null, "uvm_test_top", "vif", duv_if);
-        run_test("axi4_lite_slave_test");
+        run_test("axi4_lite_slave_base_test");
     end
 
 endmodule: axi4_lite_slave_top
