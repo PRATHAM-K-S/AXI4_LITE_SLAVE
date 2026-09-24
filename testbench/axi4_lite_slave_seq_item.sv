@@ -134,7 +134,7 @@ class axi4_lite_slave_seq_item extends uvm_sequence_item;
 
         // Read address channel signals
         m_araddr =  rhs_.m_araddr;
-        m_arprot = rhs_.m_araddr;
+        m_arprot = rhs_.m_arprot;
         m_arvalid = rhs_.m_arvalid;
         m_arready = rhs_.m_arready;
 

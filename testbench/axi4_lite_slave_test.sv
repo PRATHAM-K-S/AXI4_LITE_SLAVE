@@ -35,8 +35,8 @@ class axi4_lite_slave_test extends uvm_test;
     task run_phase(uvm_phase phase);
         fork
             begin
-                axi4_lite_slave_write_sequence wr_seq;
-                wr_seq = axi4_lite_slave_write_sequence::type_id::create("wr_seq");
+                axi4_lite_slave_write_diff_cycle_sequence wr_seq;
+                wr_seq = axi4_lite_slave_write_diff_cycle_sequence::type_id::create("wr_seq");
                 phase.raise_objection(this);
                     wr_seq.start(env_h.agt_h.wr_seqr_h);
                     #100ns;
