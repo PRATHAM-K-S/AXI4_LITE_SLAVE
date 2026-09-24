@@ -27,8 +27,8 @@ class axi4_lite_slave_driver extends uvm_driver #(axi4_lite_slave_seq_item);
 
     // run_phase definition
     task run_phase(uvm_phase phase);
-        @(!vif.ARESETn);
         forever begin
+            wait (vif.ARESETn);
             fork
                 fork
                     write();
