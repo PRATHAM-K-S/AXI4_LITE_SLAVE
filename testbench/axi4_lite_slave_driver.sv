@@ -37,10 +37,10 @@ class axi4_lite_slave_driver extends uvm_driver #(axi4_lite_slave_seq_item);
                 @(negedge vif.ARESETn);
             join_any
             disable fork;
-            if(wr_req.m_is_item_on_flight) begin
+            if(wr_req != null && wr_req.m_is_item_on_flight) begin
                 `uvm_warning("RESET", {"on the fly reset applied", wr_req.convert2string()})
             end
-            if(rd_req.m_is_item_on_flight) begin
+            if(rd_req != null && rd_req.m_is_item_on_flight) begin
                 `uvm_warning("RESET", {"on the fly reset applied", rd_req.convert2string()})
             end
         end
@@ -98,14 +98,14 @@ class axi4_lite_slave_driver extends uvm_driver #(axi4_lite_slave_seq_item);
     // Drive read signals
     task drive_read(input axi4_lite_slave_seq_item tx);
         repeat(tx.m_rd_addr_idle_cycles) @(vif.drv_cb);
-        vif.ARADDR <= tx.m_araddr;
-        vif.ARPROT <= tx.m_arprot;
-        vif.ARVALID <= 1'b1;
-        wait_for_handshake(vif.ARREADY, "ARREADY");
-        vif.ARVALID <= 1'b0;
-        vif.RREADY <= 1'b1;
-        wait_for_handshake(vif.RREADY, "RREADY");
-        vif.RREADY <=1'b0;
+        vif.drv_cb.ARADDR <= tx.m_araddr;
+        vif.drv_cb.ARPROT <= tx.m_arprot;
+        vif.drv_cb.ARVALID <= 1'b1;
+        wait_for_handshake(vif.drv_cb.ARREADY, "ARREADY");
+        vif.drv_cb.ARVALID <= 1'b0;
+        vif.drv_cb.RREADY <= 1'b1;
+        wait_for_handshake(vif.drv_cb.RVALID, "RVALID");
+        vif.drv_cb.RREADY <= 1'b0;
     endtask: drive_read
 
     task wait_for_handshake(const ref logic signal, input string signal_name);

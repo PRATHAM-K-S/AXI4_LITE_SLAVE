@@ -79,6 +79,7 @@ class axi4_lite_slave_monitor extends uvm_monitor;
         rd_tx.m_tx_type = READ;
 
         forever begin
+            @(vif.mon_cb);
             if(!vif.ARESETn) begin
                 got_araddr = 1'b0;
                 continue;
