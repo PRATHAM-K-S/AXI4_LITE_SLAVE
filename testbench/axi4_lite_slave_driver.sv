@@ -51,7 +51,6 @@ class axi4_lite_slave_driver extends uvm_driver #(axi4_lite_slave_seq_item);
         forever begin
             wr_seqr_item_port.get_next_item(wr_req);
             wr_req.m_is_item_on_flight = 1'b1;
-            $display("Running");
             drive_write(wr_req);
             wr_req.m_is_item_on_flight = 1'b0;
             wr_seqr_item_port.item_done();        
@@ -86,7 +85,7 @@ class axi4_lite_slave_driver extends uvm_driver #(axi4_lite_slave_seq_item);
                 vif.drv_cb.WSTRB <= tx.m_wstrb;
                 vif.drv_cb.WVALID <= 1'b1;
                 wait_for_handshake(vif.drv_cb.WREADY, "WREADY");
-                vif.drv_cb.WVALID <= 1'b0;   
+                vif.drv_cb.WVALID <= 1'b0;  
             end
         join
         repeat(tx.m_wr_bready_idle_cycles) @(vif.drv_cb);
