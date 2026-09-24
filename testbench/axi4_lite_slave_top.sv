@@ -38,6 +38,16 @@ module axi4_lite_slave_top;
     );
 
     initial begin
+        forever #5 ACLK = ~ACLK;
+    end
+
+    initial begin
+        ARESETn = 1'b0;
+        repeat(3) @(posedge ACLK);
+        ARESETn = 1'b1;
+    end
+
+    initial begin
         uvm_config_db #(virtual axi4_lite_slave_if)::set(null, "uvm_test_top", "vif", duv_if);
         run_test("axi4_lite_slave_test");
     end
